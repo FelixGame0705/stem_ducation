@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: stem_center
+      MYSQL_USER: tien
+      MYSQL_PASSWORD: Lz8p#Wq9Bv!x3Rs%40T1uE
+      MYSQL_ROOT_HOST: db
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: stem-center-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"   # Next.js frontend
+      - "5000:5000"   # Express backend API
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: mysql://tien:Lz8p#Wq9Bv!x3Rs%40T1uE@db:3306/stem_center
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      MYSQL_USER: tien
+      MYSQL_PASSWORD: Lz8p#Wq9Bv!x3Rs%40T1uE
+      MYSQL_DATABASE: stem_center
+      BACKEND_PORT: 5000
+      # ... các biến môi trường khác ...
+    working_dir: /app
+
+volumes:
+  mysql-data:
