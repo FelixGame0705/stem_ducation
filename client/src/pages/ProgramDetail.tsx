@@ -79,7 +79,7 @@ export default function ProgramDetail() {
     <div className="min-h-screen py-20 bg-gray-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link href="/chuong-trinh-hoc">
-          <Button variant="ghost" className="mb-8">
+          <Button variant="ghost" className="mb-8 cursor-pointer">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Quay lại
           </Button>
